@@ -1,4 +1,7 @@
+import 'package:flutter/material.dart';
+
 import 'question.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class QuizBrain {
   int _questionNumber = 0;
@@ -35,8 +38,6 @@ class QuizBrain {
     if (_questionNumber < _questionBank.length - 1) {
       _questionNumber++;
     }
-    print(_questionNumber);
-    print(_questionBank.length);
   }
 
   String getQuestionText() {
