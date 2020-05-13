@@ -1,3 +1,5 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 
 import 'question.dart';
@@ -37,6 +39,25 @@ class QuizBrain {
   void nextQuestion() {
     if (_questionNumber < _questionBank.length - 1) {
       _questionNumber++;
+      // } else
+      //   showDialog(
+      //     context: null,
+      //     builder: (BuildContext context) {
+      //       return AlertDialog(
+      //         title: new Text("You finished!"),
+      //         content: new Text("Thanks for playing!"),
+      //         actions: <Widget>[
+      //           new FlatButton(
+      //             child: new Text("Reset"),
+      //             onPressed: () {
+      //               _questionNumber = 0;
+      //             },
+      //           )
+      //         ],
+      //         backgroundColor: Colors.white,
+      //       );
+      //     },
+      //   );
     }
   }
 

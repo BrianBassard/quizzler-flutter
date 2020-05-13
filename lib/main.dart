@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'quiz_brain.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 
 QuizBrain quizBrain = QuizBrain();
 
@@ -12,11 +11,14 @@ class Quizzler extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Colors.grey.shade900,
+        backgroundColor: Colors.red[100],
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: QuizPage(),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: QuizPage(),
+            ),
           ),
         ),
       ),
@@ -39,11 +41,11 @@ class _QuizPageState extends State<QuizPage> {
     setState(() {
       if (userPickedAnswer == correctAnswer) {
         scoreKeeper.add(
-          Icon(Icons.check, color: Colors.green),
+          Icon(Icons.check, color: Colors.cyan[200]),
         );
       } else
         scoreKeeper.add(
-          Icon(Icons.close, color: Colors.red),
+          Icon(Icons.close, color: Colors.orange[100]),
         );
 
       quizBrain.nextQuestion();
@@ -65,57 +67,67 @@ class _QuizPageState extends State<QuizPage> {
         ),
       ),
     );
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        Expanded(
-          flex: 5,
-          child: padding2,
-        ),
-        Expanded(
-          child: Padding(
-            padding: EdgeInsets.all(15.0),
-            child: FlatButton(
-              textColor: Colors.white,
-              color: Colors.green,
-              child: Text(
-                'True',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20.0,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 150.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Expanded(
+            flex: 5,
+            child: padding2,
+          ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.all(15.0),
+              child: FlatButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(30.0)),
+                textColor: Colors.white,
+                color: Colors.cyan[200],
+                child: Text(
+                  'True',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20.0,
+                  ),
                 ),
+                onPressed: () {
+                  checkAnswer(true);
+                  //The user picked true.
+                },
               ),
-              onPressed: () {
-                checkAnswer(true);
-                //The user picked true.
-              },
             ),
           ),
-        ),
-        Expanded(
-          child: Padding(
-            padding: EdgeInsets.all(15.0),
-            child: RaisedButton(
-              color: Colors.red,
-              child: Text(
-                'False',
-                style: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.white,
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.all(15.0),
+              child: FlatButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(30.0)),
+                color: Colors.orange[100],
+                child: Text(
+                  'False',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.white,
+                  ),
                 ),
+                onPressed: () {
+                  checkAnswer(false);
+                  //The user picked false.
+                },
               ),
-              onPressed: () {
-                checkAnswer(false);
-                //The user picked false.
-              },
             ),
           ),
-        ),
-        Row(
-          children: scoreKeeper,
-        )
-      ],
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: scoreKeeper,
+            ),
+          )
+        ],
+      ),
     );
   }
 }
